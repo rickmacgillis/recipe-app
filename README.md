@@ -1,6 +1,6 @@
 # Recipe App
 
-This repo contains just a very basic recipes app that I built to showcase my Angular 8 knowledge.
+This repo contains just a very basic recipes app that I built to showcase my Angular 8 and TypeScript knowledge.
 
 ## Development server
 
