@@ -8,7 +8,14 @@ import { AppRouterModule } from './app-router.module';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core.module';
 import { StoreModule } from '@ngrx/store';
-import { ShoppingListReducer } from './shopping-list/store/shopping-list.reducer';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import * as fromApp from './store/app.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { AuthEffects } from './auth/store/auth.effects';
+import { environment } from 'src/environments/environment';
+import { RecipeEffects } from './recipe-book/store/recipe.effects';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -16,12 +23,19 @@ import { ShoppingListReducer } from './shopping-list/store/shopping-list.reducer
     HeaderComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     HttpClientModule,
-    StoreModule.forRoot({ shoppingList: ShoppingListReducer }),
+    StoreModule.forRoot(fromApp.appReducer),
+    EffectsModule.forRoot([
+      AuthEffects,
+      RecipeEffects,
+    ]),
+    StoreDevtoolsModule.instrument({ logOnly: environment.production }),
+    StoreRouterConnectingModule.forRoot(),
     AppRouterModule,
     SharedModule,
     CoreModule,
+    BrowserAnimationsModule,
   ],
   bootstrap: [AppComponent],
 })

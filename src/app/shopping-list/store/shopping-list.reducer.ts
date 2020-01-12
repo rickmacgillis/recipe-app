@@ -19,10 +19,6 @@ const initialState: State = {
 
 };
 
-export interface AppState {
-    shoppingList: State;
-};
-
 export function ShoppingListReducer(
     state: State = initialState,
     action: ShoppingListActions.ShoppingListActions
