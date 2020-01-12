@@ -50,5 +50,5 @@ Thumbs.db
 .firebase/
 
 # Environment
-/environments/*
+/environments/
 !/environments/environment.sample.ts
